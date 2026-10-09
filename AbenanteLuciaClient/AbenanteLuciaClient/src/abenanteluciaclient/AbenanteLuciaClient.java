@@ -27,10 +27,10 @@ public class AbenanteLuciaClient {
         while (true) {
             OutputStream outputStream = socket.getOutputStream();
             DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
-            
             System.out.println("bella");
             String msg = scr.nextLine();
             dataOutputStream.writeUTF(msg);
+            
             InputStream inputStream = socket.getInputStream();
             DataInputStream dataInputStream = new DataInputStream(inputStream);
             String response = dataInputStream.readUTF();
