@@ -31,7 +31,8 @@ public class Writer implements Runnable {
                 String msg = scr.nextLine();
                 dataOutputStream.writeUTF(msg);
 
-                if (msg == "exit") { // per uscire
+                if (msg.equals("exit")) { // per uscire
+                    System.out.println("fine client");
                     break;
                 }
             }

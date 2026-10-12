@@ -13,25 +13,37 @@ import java.net.Socket;
  */
 public class AbenanteLuciaServer {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         int porta = 5555;
 
+        // apre il server sulla porta 5555
         ServerSocket serverSocket = new ServerSocket(porta);
-        while (true) {
-            Socket clientSocket = serverSocket.accept();
-            InputStream inputStream = clientSocket.getInputStream();
-            DataInputStream dataInputStream = new DataInputStream(inputStream);
-            String clientMessage = dataInputStream.readUTF();
-            System.out.println("Messaggio dal client: " + clientMessage);
-            OutputStream outputStream = clientSocket.getOutputStream();
-            DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
-            String response = "Ciao, client! :)";
-            dataOutputStream.writeUTF(response);
-            clientSocket.close();
-        }
-    }
+        System.out.println("In attesa di un client...");
 
+        // si ferma qui finché un client si collega
+        Socket clientSocket = serverSocket.accept();
+        System.out.println("Client connesso");
+
+        // crea i due oggetti e gli passa lo stesso socket
+        Writer writer = new Writer();
+        writer.setSocket(clientSocket);
+
+        Reader reader = new Reader();
+        reader.setSocket(clientSocket);
+
+        // un Runnable va inserito in un Thread per partire
+        Thread threadWriter = new Thread(writer);
+        Thread threadReader = new Thread(reader);
+
+        threadWriter.start(); // avvia run() di Writer
+        threadReader.start(); // avvia run() di Reader
+
+        // il main aspetta che i thread finiscano
+        threadWriter.join();
+        threadReader.join();
+
+        // chiude solo alla fine
+        clientSocket.close();
+        serverSocket.close();
+    }
 }
