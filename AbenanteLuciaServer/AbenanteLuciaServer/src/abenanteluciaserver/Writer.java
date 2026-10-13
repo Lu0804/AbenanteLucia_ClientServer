@@ -23,9 +23,9 @@ public class Writer implements Runnable {
     public void run() {
 
         try {
-            // flusso in uscita del socket (i byte che vanno al client)
+            // in uscita del socket (i byte che vanno al client)
             OutputStream outputStream = socket.getOutputStream();
-            // serve per usare writeUTF, che invia una stringa
+            // serve per usre writeUTF invia una stringa
             DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
 
             while (true) { // per scrivere più messaggi
@@ -40,11 +40,11 @@ public class Writer implements Runnable {
                 }
             }
         } catch (IOException e) {
-            System.out.println("errore"); // problema di comunicazione
+            System.out.println("errore"); // problema 
         }
     }
 
-    // riceve il socket dal main
+    
     public void setSocket(Socket socket) {
         this.socket = socket;
     }

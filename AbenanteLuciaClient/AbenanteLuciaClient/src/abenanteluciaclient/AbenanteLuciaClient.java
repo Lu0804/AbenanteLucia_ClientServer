@@ -15,10 +15,10 @@ import java.util.*;
 public class AbenanteLuciaClient {
 
     /**
-     * @param args the command line arguments
+     * @param args the command line argumentsS
      */
     public static void main(String[] args) throws IOException, InterruptedException {
-        String ip = "localhost";
+        String ip = "10.205.0.115"; //localhost
         int porta = 5555;
 
         Socket socket = new Socket(ip, porta);//connessione con il server 
