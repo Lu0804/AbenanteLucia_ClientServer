@@ -18,7 +18,7 @@ public class AbenanteLuciaClient {
      * @param args the command line argumentsS
      */
     public static void main(String[] args) throws IOException, InterruptedException {
-        String ip = "10.205.0.115"; //localhost
+        String ip = "localhost"; //localhost-10.205.0.115
         int porta = 5555;
 
         Socket socket = new Socket(ip, porta);//connessione con il server 
